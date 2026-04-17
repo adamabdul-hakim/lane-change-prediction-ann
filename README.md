@@ -42,15 +42,24 @@ This project uses the **NGSIM I-80 vehicle trajectory dataset**, which contains 
 - ReLU activation for hidden layers
 - Sigmoid output for probability
 
+### Training Improvements
+- Addressed class imbalance using weighted loss (BCEWithLogitsLoss)
+- Improved recall and F1 score significantly
+- Tuned decision threshold for better precision-recall balance
+
 ---
 
-## Current Progress
+## Results
 
-- Completed full data preprocessing pipeline
-- Built labeled dataset using sliding window approach
-- Cleaned data to remove noise and formatting issues
-- Trained initial ANN model on subset of data
-- Achieved ~89% accuracy (above baseline)
+### Best Performance (after tuning)
+- Precision: ~0.31
+- Recall: ~0.76
+- F1 Score: ~0.44
+
+### Key Insight
+- Accuracy alone was misleading due to class imbalance
+- Weighted loss improved detection of lane changes
+- Model now balances detection vs false positives effectively
 
 ---
 
@@ -95,15 +104,14 @@ Note: Raw dataset is not included in this repository.
 
 ## Status
 🚧 In Progress  
-- Data pipeline complete  
-- Initial model trained and evaluated  
-- Ongoing improvements and scaling  
+- Full pipeline implemented  
+- Model trained and evaluated  
+- Evaluation metrics and visualization added  
 
 ---
 
 ## Future Work
-- Improve model evaluation (precision, recall, F1, ROC-AUC)
-- Train on larger dataset
-- Experiment with different architectures
-- Move pipeline into reusable src/ modules
-- Add visualization of predictions
+- Add Precision-Recall curve visualization
+- Experiment with additional features
+- Try alternative architectures
+- Refactor code into reusable modules
