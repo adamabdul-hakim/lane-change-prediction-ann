@@ -29,14 +29,16 @@ def split_data(X, y, test_size=0.2, random_state=42):
 def normalize_data(X_train, X_test):
     """Z-score normalise using training statistics only to avoid data leakage.
 
-    Returns (X_train_norm, X_test_norm).
+    Returns (X_train_norm, X_test_norm, mean, std).
+    mean and std should be saved alongside the model so inference on new
+    samples uses the same scale as training.
     """
     mean = X_train.mean(axis=0)
     std = X_train.std(axis=0)
     std[std == 0] = 1  # constant features: avoid division by zero
     X_train_norm = (X_train - mean) / std
     X_test_norm = (X_test - mean) / std
-    return X_train_norm, X_test_norm
+    return X_train_norm, X_test_norm, mean, std
 
 
 def oversample(X_train, y_train, random_state=42):

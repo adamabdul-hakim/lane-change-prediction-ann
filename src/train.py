@@ -49,7 +49,8 @@ def main():
     X_train, X_test, y_train, y_test = split_data(X, y)
 
     # normalise using training statistics only (avoids test-set leakage)
-    X_train, X_test = normalize_data(X_train, X_test)
+    # mean and std are saved so predict.py can normalise new samples identically
+    X_train, X_test, norm_mean, norm_std = normalize_data(X_train, X_test)
 
     # oversample minority class on training data only
     X_train, y_train = oversample(X_train, y_train)
@@ -120,11 +121,14 @@ def main():
     lr_recall    = recall_score(y_test_np, lr_preds)
     lr_f1        = f1_score(y_test_np, lr_preds)
 
-    # --- 7. Save model -------------------------------------------------------
+    # --- 7. Save model and normalisation parameters --------------------------
     MODELS_DIR.mkdir(exist_ok=True)
     model_path = MODELS_DIR / "ann.pt"
     torch.save(model.state_dict(), model_path)
-    print(f"\nModel saved to {model_path}")
+    norm_path = MODELS_DIR / "norm_params.npz"
+    np.savez(norm_path, mean=norm_mean, std=norm_std)
+    print(f"\nModel saved  -> {model_path}")
+    print(f"Norm params  -> {norm_path}")
 
     # --- 8. Print comparison -------------------------------------------------
     print("\n" + "=" * 40)
