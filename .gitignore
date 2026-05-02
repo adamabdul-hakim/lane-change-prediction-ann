@@ -13,3 +13,6 @@ data/processed/
 # trained model weights — not tracked (regenerate with python src/train.py)
 models/
 *.pt
+
+# report files — submitted via Overleaf, not tracked in repo
+report/
