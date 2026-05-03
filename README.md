@@ -69,6 +69,12 @@ The ANN significantly outperforms the logistic regression baseline, demonstratin
 
 ---
 
+## Live Demo
+
+The animation below shows the ANN making real-time predictions on a real vehicle trajectory from the NGSIM dataset. The probability bar fills as the vehicle prepares to change lanes — the model predicts the event ~2–3 seconds before it happens.
+
+![ANN Live Prediction Demo](figures/ann_demo.gif)
+
 ## Visualisations
 
 **Confusion Matrix**
